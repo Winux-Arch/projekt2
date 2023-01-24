@@ -1,0 +1,28 @@
+<!-- Formular zur Eingabeverarbeitung-->
+<form method=post action="">
+<table>
+  {% for field in form %}
+    <tr>
+    <td>{{ field.label }}</td>
+    {% if field.name != 'Erase' %}
+      <td>{{ field(size=12) }}</td>
+    {% else %}
+      <td>{{ field }}</td>
+    {% endif %}
+    {% if field.errors %}
+      <td><ul class=errors>
+      {% for error in field.errors %}
+        <li><font color="red">{{ error }}</font></li>
+      {% endfor %}</ul></td>
+    {% endif %}
+    </tr>
+  {% endfor %}
+</table>
+<p><input type="submit" value="Ausrechnen"></form></p>
+<!-- Error catcher falls Eingabe nicht valide -->
+{% if result != None %}
+<p>
+<!-- Gibt den Graphen als Bild aus (herunterladbar) -->
+<img src="data:image/png;base64,{{ result }}" width="500">
+</p>
+{% endif %}
