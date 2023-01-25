@@ -8,6 +8,7 @@ class InputForm(Form):
         default='sin(x)',
         validators=[validators.InputRequired()])
     Domain = StringField(
-        label='Intervall: [xmin, xmax]', default='[0, 2*pi]',
+        label='Intervall: [xmin, xmax]', 
+        default='[0, 2*pi]',
         validators=[validators.InputRequired()])
     

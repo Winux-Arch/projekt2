@@ -1,13 +1,13 @@
-#importierungen
+#Importierungen
 from model import InputForm
 from flask import Flask, render_template, request
 from compute import plot_formula as compute
 import random
 
-# erstellen der request an die server
+# erstellen der request an den server
 app = Flask(__name__)
 
-# app routing um server aufrecht zu erhalten, dafür wird die Seite alle paar Minuten angepingt
+# app routing um auszuwählen welche seite gezeigt wird
 # lädt die website und synchronisiert sie mit dem programm
 @app.route('/', methods=['GET', 'POST'])
 def index():

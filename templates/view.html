@@ -1,5 +1,149 @@
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {font-family: Arial, Helvetica, sans-serif;}
+
+/* Farbe und Aussehen für den Hilfe knopf*/
+body {
+    background-color: #8fcbff;
+}
+    
+hr {
+    background-color: #461c9e;
+    height: 2px;
+}
+    
+#hilfeknopf {
+    border-radius: 25px;
+    background-color: #6bff2b;
+    padding: 5px 15px 5px 15px;
+    margin-bottom: 15px;
+}
+
+#ausrechnen {
+    border-radius: 25px;
+    background-color: #2ba3ff;
+    padding: 5px 15px 5px 15px;
+    margin: 10px 0 10px 0;
+}
+
+#eingabefeld {
+    background-color: #2bffa3;
+    padding: 15px 30px 0 30px;
+    border: solid 2px #1c9e66;
+    border-radius: 10px;
+}
+
+#topic {
+    text-align: center;
+    background-color: #8fff91;
+    border: solid 2px #5ce65e;
+    border-radius: 10px;
+    color: #461c9e;
+    padding: 10px 0 10px 0;
+}
+
+#graph {
+    border: solid 2px #1a1a1a;
+}
+
+.show {
+    color: black;
+}
+
+.modal {
+  display: none; 
+  position: fixed; 
+  z-index: 1; 
+  padding-top: 10px; 
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%; 
+  overflow: auto; 
+  background-color: rgb(230,255,255); 
+  background-color: rgba(230,255,255,0.75);
+}
+
+
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+</style>
+</head>
+<body>
+
+<h1 id="topic"><u>Funktionenplotter</u></h1>
+<hr><br>
+
+<!-- Zeigt Hilfe Button-->
+<div>
+    <button id="hilfeknopf">Hilfe</button><br>
+</div>
+<!-- Zeigt das Menü -->
+<div id="menu" class="modal">
+
+  <!-- Inhalt Hilfe-->
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h3>Schreibweisen</h3>
+    <ul>
+        <li>Plus / Minus: <i class="fa-solid fa-plus"></i>, <i class="fa-solid fa-minus"></i></li>
+        <li>Mal / Geteilt: <i class="fa-solid fa-star-of-life"></i>, <i class="fa-solid fa-wand-magic"></i></li>
+        <li>Potenziert: <i class="fa-solid fa-star-of-life"></i><i class="fa-solid fa-star-of-life"></i></li>
+    </ul>
+    <h3>Funktionen</h3>
+    <ul>
+        <li><a href="https://numpy.org/doc/stable/reference/routines.math.html">Jede numpy-unterstützte Funktion</a></li> 
+        <li>Wurzel <i class="fa-solid fa-square-root-variable"></i>: sqrt()</li>
+        <li>Sinus/Cosinus/Tangens: sin(), cos(), tan()</li>
+    </ul>
+  </div>
+
+</div>
+<!-- Code für alle Icons -->
+<script src="https://kit.fontawesome.com/bbe2de1e57.js" crossorigin="anonymous"></script>
+<!-- Code für den Hilfe Button -->
+<script>
+
+var modal = document.getElementById("menu");
+var btn = document.getElementById("hilfeknopf");
+var span = document.getElementsByClassName("close")[0];
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+span.onclick = function() {
+  modal.style.display = "none";
+}
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+</script>
+
+</body>
 <!-- Formular zur Eingabeverarbeitung-->
-<form method=post action="">
+<form id="eingabefeld" method=post action="">
 <table>
   {% for field in form %}
     <tr>
@@ -18,11 +162,12 @@
     </tr>
   {% endfor %}
 </table>
-<p><input type="submit" value="Ausrechnen"></form></p>
+<p><input id="ausrechnen" type="submit" value="Ausrechnen"></form></p>
 <!-- Error catcher falls Eingabe nicht valide -->
 {% if result != None %}
 <p>
 <!-- Gibt den Graphen als Bild aus (herunterladbar) -->
-<img src="data:image/png;base64,{{ result }}" width="500">
+<img id="graph" src="data:image/png;base64,{{ result }}" width="500">
 </p>
+
 {% endif %}
