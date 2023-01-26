@@ -37,6 +37,12 @@ def plot_formula(formula, domain):
       namespace = np.__dict__.copy()
       namespace.update({'x': x})
       y = eval(formula, namespace)
+      # Plotten des Graphen
+      fig = plt.Figure()
+      ax = fig.subplots()
+      ax.grid()
+      ax.plot(x,y)
+      
     except Exception as e:
         #zeigt Fehlermeldung
         fig = plt.Figure()
@@ -50,10 +56,7 @@ def plot_formula(formula, domain):
         figdata_png = base64.b64encode(buf.getbuffer()).decode("ascii")
         return figdata_png
     # Plotten des Graphen
-    fig = plt.Figure()
-    ax = fig.subplots()
-    ax.grid()
-    ax.plot(x,y)
+    
     # Temporäres Speichern
     buf = BytesIO()
     fig.savefig(buf, format="png")
