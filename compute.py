@@ -17,7 +17,7 @@ def plot_formula(formula, domain):
         x = np.linspace(xmin, xmax, 10001)
     except Exception as e:
         input_error = True
-    if not isinstance(domain, list) or not len(domain) == 2:
+    if not isinstance(domain, list) and len(domain) == 2:
         input_error = True
     if input_error:
         #erzeugt Fehlermeldung
